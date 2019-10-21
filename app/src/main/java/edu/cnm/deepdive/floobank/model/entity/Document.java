@@ -1,30 +1,81 @@
 package edu.cnm.deepdive.floobank.model.entity;
 
+import android.support.annotation.NonNull;
 import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
+import java.util.Date;
 
+@Entity(foreignKeys = {
+    @ForeignKey(
+        entity = Account.class,
+        parentColumns = "account_id",
+        childColumns = "account_id",
+        onDelete = ForeignKey.CASCADE
+    )
+})
 public class Document {
   @PrimaryKey(autoGenerate = true)
-  @ColumnInfo(name="card_id")
+  @ColumnInfo(name="id")
   private long id;
 
-  @NonNull
-  @ColumnInfo(index = true)
-  private Date created = new Date();
+  @ColumnInfo(name="doc_type")
+  private String docType;
 
-  @NonNull
-  @ColumnInfo(index = true)
-  private Date updated = new Date();
+  @ColumnInfo(name="name")
+  private String name;
 
-  @ColumnInfo(name = "shoe_id",index=true)
-  private Long shoeId;
+  @ColumnInfo(name="type")
+  private String type;
 
-  @ColumnInfo(name="hand_id",index=true)
-  private Long handId;
+  @ColumnInfo(name="status")
+  private String status;
 
-  @NonNull
-  private Rank rank;
-  @NonNull
-  private Suit suit;
+  @ColumnInfo(name="doc_content")
+  private String docContent;
 
+  public long getId() {
+    return id;
+  }
+
+  public String getDocType() {
+    return docType;
+  }
+
+  public void setDocType(String docType) {
+    this.docType = docType;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+  public String getDocContent() {
+    return docContent;
+  }
+
+  public void setDocContent(String docContent) {
+    this.docContent = docContent;
+  }
 }

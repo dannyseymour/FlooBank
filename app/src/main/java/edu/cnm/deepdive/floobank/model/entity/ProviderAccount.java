@@ -5,6 +5,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
+import edu.cnm.deepdive.floobank.model.pojo.RefreshInfo;
+import java.util.Date;
 
 @Entity (
     foreignKeys = {
@@ -13,31 +15,52 @@ import androidx.room.PrimaryKey;
             parentColumns = "provider_id",
             childColumns = "provider_id",
             onDelete = ForeignKey.CASCADE
-        )
+        ),@ForeignKey(
+        entity = Profile.class,
+        parentColumns = "profile_id",
+        childColumns = "profile_id",
+        onDelete = ForeignKey.CASCADE
+    )
     }
 )
 public class ProviderAccount {
+
+  private RefreshInfo refreshInfo;
+
   @PrimaryKey(autoGenerate = true)
   @ColumnInfo(name="provideraccount_id")
   private long id;
+
 
   @NonNull
   @ColumnInfo(name= "request_id", index = true)
   private String RequestID;
 
+  public long getId() {
+    return id;
+  }
+
+  public RefreshInfo getRefreshInfo() {
+    return refreshInfo;
+  }
+
+  public void setRefreshInfo(RefreshInfo refreshInfo) {
+    this.refreshInfo = refreshInfo;
+  }
+
   @NonNull
-  @ColumnInfo(index = true)
-  private Date updated = new Date();
+  public String getRequestID() {
+    return RequestID;
+  }
 
-  @ColumnInfo(name = "shoe_id",index=true)
-  private Long shoeId;
+  public void setRequestID(@NonNull String requestID) {
+    RequestID = requestID;
+  }
 
-  @ColumnInfo(name="hand_id",index=true)
-  private Long handId;
-
-  @NonNull
-  private Rank rank;
-  @NonNull
-  private Suit suit;
-
+  public String toString()
+  {
+    StringBuilder refreshStatus = new StringBuilder("");
+    refreshStatus.append("providerAccountId = " + id).append(refreshInfo.toString());
+    return refreshStatus.toString();
+  }
 }

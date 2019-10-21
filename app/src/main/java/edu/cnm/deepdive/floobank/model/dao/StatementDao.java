@@ -1,5 +1,8 @@
 package edu.cnm.deepdive.floobank.model.dao;
 
-public class StatementDao {
+import androidx.room.Dao;
+
+@Dao
+public interface StatementDao {
 
 }
